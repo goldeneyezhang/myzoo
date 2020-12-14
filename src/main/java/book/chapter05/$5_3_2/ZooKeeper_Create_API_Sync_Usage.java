@@ -13,7 +13,7 @@ public class ZooKeeper_Create_API_Sync_Usage implements Watcher {
     private static CountDownLatch connectedSemaphore = new CountDownLatch(1);
 
     public static void main(String[] args) throws Exception{
-        ZooKeeper zookeeper = new ZooKeeper("domain1.book.zookeeper:2181", 
+        ZooKeeper zookeeper = new ZooKeeper("localhost:2181",
 				5000, //
 				new ZooKeeper_Create_API_Sync_Usage());
         connectedSemaphore.await();
@@ -29,6 +29,7 @@ public class ZooKeeper_Create_API_Sync_Usage implements Watcher {
                 CreateMode.EPHEMERAL_SEQUENTIAL);
         System.out.println("Success create znode: " + path2);
     }
+    @Override
     public void process(WatchedEvent event) {
         if (KeeperState.SyncConnected == event.getState()) {
             connectedSemaphore.countDown();

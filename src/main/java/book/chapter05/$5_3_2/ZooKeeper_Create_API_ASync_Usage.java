@@ -16,7 +16,7 @@ public class ZooKeeper_Create_API_ASync_Usage implements Watcher {
 
     public static void main(String[] args) throws Exception{
         
-	 ZooKeeper zookeeper = new ZooKeeper("domain1.book.zookeeper:2181", 
+	 ZooKeeper zookeeper = new ZooKeeper("localhost:2181",
 				5000, //
 				new ZooKeeper_Create_API_ASync_Usage());
 	 connectedSemaphore.await();
@@ -34,7 +34,7 @@ public class ZooKeeper_Create_API_ASync_Usage implements Watcher {
 	    		new IStringCallback(), "I am context.");
 	 Thread.sleep( Integer.MAX_VALUE );
     }
-    
+    @Override
     public void process(WatchedEvent event) {
         if (KeeperState.SyncConnected == event.getState()) {
             connectedSemaphore.countDown();
@@ -42,6 +42,7 @@ public class ZooKeeper_Create_API_ASync_Usage implements Watcher {
     }
 }
 class IStringCallback implements AsyncCallback.StringCallback{
+	@Override
   public void processResult(int rc, String path, Object ctx, String name) {
     System.out.println("Create path result: [" + rc + ", " + path + ", "
                    + ctx + ", real path name: " + name);
