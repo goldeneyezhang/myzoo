@@ -16,9 +16,7 @@ public class ZooKeeper_Create_API_ASync_Usage implements Watcher {
 
     public static void main(String[] args) throws Exception{
         
-	 ZooKeeper zookeeper = new ZooKeeper("localhost:2181",
-				5000, //
-				new ZooKeeper_Create_API_ASync_Usage());
+	 ZooKeeper zookeeper = new ZooKeeper("localhost:2181", 5000, new ZooKeeper_Create_API_ASync_Usage());
 	 connectedSemaphore.await();
 	    
 	 zookeeper.create("/zk-test-ephemeral-", "".getBytes(), 

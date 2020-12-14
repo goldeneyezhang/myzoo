@@ -16,14 +16,13 @@ public class Delete_API_Sync_Usage implements Watcher {
 
     public static void main(String[] args) throws Exception {
 
-    	String path = "/zk-book";
-    	zk = new ZooKeeper("domain1.book.zookeeper:2181", 
-				5000, //
-				new Delete_API_Sync_Usage());
+    	String path = "/zk-book1";
+    	zk = new ZooKeeper("localhost:2181", 5000, new Delete_API_Sync_Usage());
+        System.out.println(zk.getState());
     	connectedSemaphore.await();
 
     	zk.create( path, "".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL );
-    	zk.delete( path, -1 );
+        zk.delete( path, -1 );
     	
     	Thread.sleep( Integer.MAX_VALUE );
     }

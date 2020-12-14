@@ -19,11 +19,11 @@ public class GetData_API_ASync_Usage implements Watcher {
     public static void main(String[] args) throws Exception {
 
     	String path = "/zk-book";
-    	zk = new ZooKeeper("domain1.book.zookeeper:2181", 
-				5000, //
+    	zk = new ZooKeeper("localhost:2182",
+				5000,
 				new GetData_API_ASync_Usage());
         connectedSemaphore.await();
-        
+
         zk.create( path, "123".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL );
         
         zk.getData( path, true, new IDataCallback(), null );
@@ -32,6 +32,7 @@ public class GetData_API_ASync_Usage implements Watcher {
         
         Thread.sleep( Integer.MAX_VALUE );
     }
+    @Override
     public void process(WatchedEvent event) {
         if (KeeperState.SyncConnected == event.getState()) {
   	      if (EventType.None == event.getType() && null == event.getPath()) {
@@ -45,6 +46,7 @@ public class GetData_API_ASync_Usage implements Watcher {
        }
 }
 class IDataCallback implements AsyncCallback.DataCallback{
+    @Override
 	public void processResult(int rc, String path, Object ctx, byte[] data, Stat stat) {
         System.out.println(rc + ", " + path + ", " + new String(data));
         System.out.println(stat.getCzxid()+","+

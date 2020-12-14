@@ -18,8 +18,8 @@ public class ZooKeeper_GetChildren_API_Sync_Usage implements Watcher {
     public static void main(String[] args) throws Exception{
 
     	String path = "/zk-book";
-        zk = new ZooKeeper("domain1.book.zookeeper:2181", 
-				5000, //
+        zk = new ZooKeeper("localhost:2182",
+				5000,
 				new ZooKeeper_GetChildren_API_Sync_Usage());
         connectedSemaphore.await();
         zk.create(path, "".getBytes(), 
@@ -35,6 +35,7 @@ public class ZooKeeper_GetChildren_API_Sync_Usage implements Watcher {
         
         Thread.sleep( Integer.MAX_VALUE );
     }
+    @Override
     public void process(WatchedEvent event) {
       if (KeeperState.SyncConnected == event.getState()) {
         if (EventType.None == event.getType() && null == event.getPath()) {

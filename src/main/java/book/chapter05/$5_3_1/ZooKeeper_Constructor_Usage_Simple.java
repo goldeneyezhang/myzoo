@@ -13,7 +13,7 @@ public class ZooKeeper_Constructor_Usage_Simple implements Watcher {
     
     public static void main(String[] args) throws Exception{
         
-        ZooKeeper zookeeper = new ZooKeeper("localhost:2181",
+        ZooKeeper zookeeper = new ZooKeeper("localhost:2182",
         									5000, //
         									new ZooKeeper_Constructor_Usage_Simple());
         System.out.println(zookeeper.getState());
