@@ -16,8 +16,8 @@ public class Exist_API_Sync_Usage implements Watcher {
     public static void main(String[] args) throws Exception {
 
     	String path = "/zk-book";
-    	zk = new ZooKeeper("domain1.book.zookeeper:2181", 
-				5000, //
+    	zk = new ZooKeeper("localhost:2181",
+				5000,
 				new Exist_API_Sync_Usage());
     	connectedSemaphore.await();
 
