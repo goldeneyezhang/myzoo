@@ -10,7 +10,7 @@ public class Create_Session_Sample_With_Namespace {
         RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
         CuratorFramework client =
         CuratorFrameworkFactory.builder()
-                             .connectString("domain1.book.zookeeper:2181")
+                             .connectString("localhost:2191")
                              .sessionTimeoutMs(5000)
                              .retryPolicy(retryPolicy)
                              .namespace("base")

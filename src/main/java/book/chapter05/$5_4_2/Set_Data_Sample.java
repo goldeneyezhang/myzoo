@@ -8,15 +8,15 @@ import org.apache.zookeeper.data.Stat;
 //使用Curator更新数据内容
 public class Set_Data_Sample {
 
-    static String path = "/zk-book";
+    static String path = "/zk-book2";
     static CuratorFramework client = CuratorFrameworkFactory.builder()
-            .connectString("domain1.book.zookeeper:2181")
+            .connectString("localhost:2191")
             .sessionTimeoutMs(5000)
             .retryPolicy(new ExponentialBackoffRetry(1000, 3))
             .build();
     public static void main(String[] args) throws Exception {
         client.start();
-        client.delete().deletingChildrenIfNeeded().forPath( path );
+        //client.delete().deletingChildrenIfNeeded().forPath( path );
         client.create()
               .creatingParentsIfNeeded()
               .withMode(CreateMode.EPHEMERAL)

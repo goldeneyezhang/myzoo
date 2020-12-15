@@ -8,7 +8,7 @@ import org.apache.zookeeper.CreateMode;
 public class Create_Node_Sample {
     static String path = "/zk-book/c1";
     static CuratorFramework client = CuratorFrameworkFactory.builder()
-            .connectString("domain1.book.zookeeper:2181")
+            .connectString("localhost:2191")
             .sessionTimeoutMs(5000)
             .retryPolicy(new ExponentialBackoffRetry(1000, 3))
             .build();

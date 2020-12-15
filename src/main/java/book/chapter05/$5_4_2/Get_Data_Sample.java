@@ -8,9 +8,9 @@ import org.apache.zookeeper.data.Stat;
 //使用Curator获取数据内容
 public class Get_Data_Sample {
 
-    static String path = "/zk-book";
+    static String path = "/zk-book2";
     static CuratorFramework client = CuratorFrameworkFactory.builder()
-            .connectString("domain1.book.zookeeper:2181")
+            .connectString("localhost:2191")
             .sessionTimeoutMs(5000)
             .retryPolicy(new ExponentialBackoffRetry(1000, 3))
             .build();
