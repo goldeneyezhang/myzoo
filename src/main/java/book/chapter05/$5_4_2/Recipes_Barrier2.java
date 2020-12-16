@@ -8,21 +8,22 @@ public class Recipes_Barrier2 {
 	public static void main(String[] args) throws Exception {
 		
 		for (int i = 0; i < 5; i++) {
+			final String number = String.valueOf(i);
 			new Thread(new Runnable() {
 				public void run() {
 					try {
 						CuratorFramework client = CuratorFrameworkFactory.builder()
-					            .connectString("domain1.book.zookeeper:2181")
+					            .connectString("localhost:2182")
 					            .retryPolicy(new ExponentialBackoffRetry(1000, 3)).build();
 						client.start();
 						DistributedDoubleBarrier barrier = new DistributedDoubleBarrier(client, barrier_path,5);
 						Thread.sleep( Math.round(Math.random() * 3000) );
 						System.out.println(Thread.currentThread().getName() + "号进入barrier" );
 						barrier.enter();
-						System.out.println("启动...");
+						System.out.println("启动..."+number);
 						Thread.sleep( Math.round(Math.random() * 3000) );
 						barrier.leave();
-						System.out.println( "退出..." );
+						System.out.println( "退出..." +number);
 					} catch (Exception e) {}
 				}
 			}).start();

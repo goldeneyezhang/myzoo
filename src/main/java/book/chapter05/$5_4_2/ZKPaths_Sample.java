@@ -10,7 +10,7 @@ public class ZKPaths_Sample {
 
 	static String path = "/curator_zkpath_sample";
 	static CuratorFramework client = CuratorFrameworkFactory.builder()
-			.connectString( "domain1.book.zookeeper:2181" )
+			.connectString( "localhost:2182" )
 			.sessionTimeoutMs( 5000 )
 			.retryPolicy( new ExponentialBackoffRetry( 1000, 3 ) )
 			.build();

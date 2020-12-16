@@ -8,7 +8,7 @@ import org.apache.curator.test.TestingServer;
 public class TestingServer_Sample {
 	static String path = "/zookeeper";
 	public static void main(String[] args) throws Exception {
-		TestingServer server = new TestingServer(2181,new File("/home/admin/zk-book-data"));
+		TestingServer server = new TestingServer(2199,new File("/home/admin/zk-book-data"));
 		
 		CuratorFramework client = CuratorFrameworkFactory.builder()
 	            .connectString(server.getConnectString())
