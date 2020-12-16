@@ -13,10 +13,10 @@ import org.apache.zookeeper.CreateMode;
 //使用Curator的异步接口
 public class Create_Node_Background_Sample {
 
-    static String path = "/zk-book";
+    static String path = "/zk-book3";
 
     static CuratorFramework client = CuratorFrameworkFactory.builder()
-            .connectString("domain1.book.zookeeper:2181")
+            .connectString("localhost:2191")
             .sessionTimeoutMs(5000)
             .retryPolicy(new ExponentialBackoffRetry(1000, 3))
             .build();
@@ -31,7 +31,7 @@ public class Create_Node_Background_Sample {
             @Override
             public void processResult(CuratorFramework client, CuratorEvent event) throws Exception {
                 System.out.println("event[code: " + event.getResultCode() + ", type: " + event.getType() + "]");
-                System.out.println("Thread of processResult: " + Thread.currentThread().getName());
+                System.out.println("Thread1 of processResult: " + Thread.currentThread().getName());
                 semaphore.countDown();
             }
         }, tp).forPath(path, "init".getBytes());
@@ -40,7 +40,7 @@ public class Create_Node_Background_Sample {
             @Override
             public void processResult(CuratorFramework client, CuratorEvent event) throws Exception {
                 System.out.println("event[code: " + event.getResultCode() + ", type: " + event.getType() + "]");
-                System.out.println("Thread of processResult: " + Thread.currentThread().getName());
+                System.out.println("Thread2 of processResult: " + Thread.currentThread().getName());
                 semaphore.countDown();
             }
         }).forPath(path, "init".getBytes());

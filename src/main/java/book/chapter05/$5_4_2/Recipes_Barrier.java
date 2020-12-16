@@ -9,18 +9,20 @@ public class Recipes_Barrier {
 	static DistributedBarrier barrier;
 	public static void main(String[] args) throws Exception {
 		for (int i = 0; i < 5; i++) {
+			final int number = i;
 			new Thread(new Runnable() {
+				@Override
 				public void run() {
 					try {
 						CuratorFramework client = CuratorFrameworkFactory.builder()
-					            .connectString("domain1.book.zookeeper:2181")
+					            .connectString("localhost:2182")
 					            .retryPolicy(new ExponentialBackoffRetry(1000, 3)).build();
 						client.start();
 						barrier = new DistributedBarrier(client, barrier_path);
 						System.out.println(Thread.currentThread().getName() + "号barrier设置" );
 						barrier.setBarrier();
 						barrier.waitOnBarrier();
-						System.err.println("启动...");
+						System.err.println("启动..."+String.valueOf(number));
 					} catch (Exception e) {}
 				}
 			}).start();

@@ -10,9 +10,9 @@ import org.apache.zookeeper.CreateMode;
 
 public class PathChildrenCache_Sample {
 
-    static String path = "/zk-book";
+    static String path = "/zk-book4";
     static CuratorFramework client = CuratorFrameworkFactory.builder()
-            .connectString("domain1.book.zookeeper:2181")
+            .connectString("localhost:2182")
             .retryPolicy(new ExponentialBackoffRetry(1000, 3))
             .sessionTimeoutMs(5000)
             .build();

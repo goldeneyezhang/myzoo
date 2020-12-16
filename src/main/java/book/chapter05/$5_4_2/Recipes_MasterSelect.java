@@ -11,7 +11,7 @@ public class Recipes_MasterSelect {
 	static String master_path = "/curator_recipes_master_path";
 	
     static CuratorFramework client = CuratorFrameworkFactory.builder()
-            .connectString("domain1.book.zookeeper:2181")
+            .connectString("localhost:2183")
             .retryPolicy(new ExponentialBackoffRetry(1000, 3)).build();
     public static void main( String[] args ) throws Exception {
     	client.start();
