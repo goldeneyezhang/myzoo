@@ -14,7 +14,7 @@ public class JuteSample {
 		//开始序列化
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		BinaryOutputArchive boa = BinaryOutputArchive.getArchive(baos);
-		new MockReqHeader( 0x34221eccb92a34el, "ping" ).serialize(boa, "header");
+		new MockReqHeader( 0x34221eccb92a34eL, "ping" ).serialize(boa, "header");
 		//这里通常是TCP网络传输对象
 		ByteBuffer bb = ByteBuffer.wrap( baos.toByteArray() );
 		//开始反序列化
